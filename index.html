@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Green Impact: Solar water and food security</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16231F;
+    --paper:#EFE6D2;
+    --paper-2:#E4D9C0;
+    --ocean:#0B4F4A;
+    --ocean-deep:#083836;
+    --solar:#E2A63B;
+    --clay:#B24B32;
+    --sage:#7C9473;
+    --line: rgba(22,35,31,0.14);
+    --fg: var(--ink);
+    --bg: var(--paper);
+    --bg-soft: var(--paper-2);
+    --card-bg: #F7F1E3;
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --fg:#EFE6D2;
+      --bg:#101A17;
+      --bg-soft:#152420;
+      --card-bg:#152420;
+      --line: rgba(239,230,210,0.14);
+      --paper-2:#152420;
+    }
+  }
+  :root[data-theme="dark"]{
+    --fg:#EFE6D2;
+    --bg:#101A17;
+    --bg-soft:#152420;
+    --card-bg:#152420;
+    --line: rgba(239,230,210,0.14);
+    --paper-2:#152420;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--fg);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;}
+  a{color:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+  .kicker{
+    display:block;
+    font-family:var(--font-body);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ocean);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .kicker{color:#7FCFC5;}
+  }
+  :root[data-theme="dark"] .kicker{color:#7FCFC5;}
+
+  h1,h2,h3{font-family:var(--font-display);font-weight:500;margin:0;letter-spacing:-0.01em;}
+  h1{font-size:clamp(2.4rem, 5vw, 4rem);line-height:1.04;font-weight:500;}
+  h2{font-size:clamp(1.9rem, 3.4vw, 2.7rem);line-height:1.1;}
+  h3{font-size:1.25rem;line-height:1.3;}
+  p{margin:0;}
+  .lede{font-size:1.2rem;line-height:1.55;color:color-mix(in srgb, var(--fg) 78%, transparent);max-width:44ch;}
+
+  /* Nav */
+  header{
+    position:sticky;top:0;z-index:40;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;max-width:1120px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:1.15rem;font-weight:600;text-decoration:none;color:var(--fg);}
+  .brand .mark{width:26px;height:26px;flex:0 0 auto;}
+  .navlinks{display:flex;gap:28px;list-style:none;margin:0;padding:0;font-size:14.5px;font-weight:500;}
+  .navlinks a{text-decoration:none;color:color-mix(in srgb, var(--fg) 75%, transparent);transition:color .15s ease;}
+  .navlinks a:hover{color:var(--fg);}
+  .navcta{
+    font-size:14px;font-weight:600;text-decoration:none;color:var(--paper);
+    background:var(--ocean);padding:10px 18px;border-radius:100px;white-space:nowrap;
+  }
+  .navtoggle{display:none;background:none;border:none;color:var(--fg);cursor:pointer;padding:6px;}
+  .navtoggle svg{width:24px;height:24px;}
+  @media (max-width:820px){
+    .navlinks{display:none;}
+    .navtoggle{display:block;}
+    .navcta{display:none;}
+  }
+
+  section{padding:96px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+
+  /* Hero */
+  .hero{padding-top:72px;padding-bottom:72px;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center;}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{margin-top:22px;}
+  .hero .lede{margin-top:22px;font-size:1.25rem;}
+  .hero-ctas{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-body);font-weight:600;font-size:15px;
+    padding:13px 24px;border-radius:100px;text-decoration:none;
+    border:1px solid transparent;cursor:pointer;
+  }
+  .btn-solid{background:var(--ocean);color:var(--paper);}
+  .btn-solid:hover{background:var(--ocean-deep);}
+  .btn-outline{border-color:var(--line);color:var(--fg);}
+  .btn-outline:hover{border-color:color-mix(in srgb, var(--fg) 40%, transparent);}
+
+  .hero-art{position:relative;}
+  .hero-art svg{width:100%;height:auto;display:block;}
+
+  /* Problem */
+  .problem{background:var(--bg-soft);}
+  .problem-head{max-width:640px;}
+  .problem-list{margin-top:52px;display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line);}
+  @media (max-width:760px){.problem-list{grid-template-columns:1fr;}}
+  .problem-item{
+    padding:30px 30px 30px 0;border-bottom:1px solid var(--line);
+  }
+  .problem-list .problem-item:nth-child(odd){border-right:1px solid var(--line);padding-right:36px;}
+  .problem-list .problem-item:nth-child(even){padding-left:36px;}
+  @media (max-width:760px){
+    .problem-list .problem-item:nth-child(odd){border-right:none;padding-right:0;}
+    .problem-list .problem-item:nth-child(even){padding-left:0;}
+  }
+  .problem-item h3{font-size:1.05rem;font-weight:600;font-family:var(--font-body);margin-bottom:8px;}
+  .problem-item p{color:color-mix(in srgb, var(--fg) 72%, transparent);font-size:.98rem;}
+  .problem-num{font-family:var(--font-display);font-size:1.1rem;color:var(--clay);display:block;margin-bottom:10px;}
+
+  /* Solution */
+  .solution-top{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+  @media (max-width:900px){.solution-top{grid-template-columns:1fr;}}
+  .solution-copy .lede{margin-top:18px;}
+  .steps{margin-top:44px;display:flex;flex-direction:column;}
+  .step{display:grid;grid-template-columns:44px 1fr;gap:18px;padding:22px 0;border-top:1px solid var(--line);}
+  .step:last-child{border-bottom:1px solid var(--line);}
+  .step-glyph{width:40px;height:40px;border-radius:50%;background:var(--card-bg);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;}
+  .step-glyph svg{width:19px;height:19px;stroke:var(--ocean);}
+  .step h3{font-size:1.05rem;font-weight:600;font-family:var(--font-body);}
+  .step p{margin-top:6px;color:color-mix(in srgb, var(--fg) 72%, transparent);font-size:.98rem;max-width:52ch;}
+  .diagram-frame{background:var(--card-bg);border:1px solid var(--line);border-radius:18px;padding:34px 26px;}
+  .diagram-frame svg{width:100%;height:auto;}
+
+  /* Why */
+  .why{background:var(--bg-soft);}
+  .why-grid{margin-top:52px;display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line);}
+  @media (max-width:760px){.why-grid{grid-template-columns:1fr;}}
+  .why-cell{padding:34px 34px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .why-cell .eyeglyph{width:30px;height:30px;margin-bottom:16px;stroke:var(--clay);}
+  .why-cell h3{font-size:1.1rem;font-weight:600;font-family:var(--font-body);margin-bottom:10px;}
+  .why-cell p{color:color-mix(in srgb, var(--fg) 72%, transparent);font-size:.98rem;}
+
+  /* Who */
+  .who-grid{margin-top:52px;display:grid;grid-template-columns:1.1fr 1fr;gap:64px;}
+  @media (max-width:900px){.who-grid{grid-template-columns:1fr;}}
+  .who-col h3{font-size:1rem;font-weight:600;font-family:var(--font-body);color:color-mix(in srgb, var(--fg) 55%, transparent);margin-bottom:18px;}
+  .who-list{list-style:none;margin:0;padding:0;}
+  .who-list li{padding:16px 0;border-top:1px solid var(--line);font-size:1.02rem;}
+  .who-list li:last-child{border-bottom:1px solid var(--line);}
+  .who-list b{font-weight:600;}
+  .who-list span{display:block;color:color-mix(in srgb, var(--fg) 65%, transparent);font-size:.92rem;margin-top:3px;}
+
+  /* Impact / metrics */
+  .impact{background:var(--ocean);color:var(--paper);}
+  .impact h2{color:var(--paper);}
+  .impact .lede{color:rgba(239,230,210,0.78);}
+  .metric-grid{margin-top:52px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(239,230,210,0.22);}
+  @media (max-width:760px){.metric-grid{grid-template-columns:repeat(2,1fr);}}
+  .metric{padding:26px 22px;border-bottom:1px solid rgba(239,230,210,0.22);}
+  .metric-grid .metric:first-child{padding-left:0;}
+  .metric-grid .metric:nth-child(4n+1),.metric-grid .metric:nth-child(4n+2),.metric-grid .metric:nth-child(4n+3){border-right:1px solid rgba(239,230,210,0.22);}
+  @media (max-width:760px){
+    .metric-grid .metric:nth-child(odd){border-right:1px solid rgba(239,230,210,0.22);padding-left:0;}
+    .metric-grid .metric:nth-child(even){padding-right:0;}
+  }
+  .metric p{font-size:.92rem;color:rgba(239,230,210,0.78);}
+  .metric h3{font-family:var(--font-display);font-weight:500;font-size:1.3rem;color:var(--solar);margin-bottom:8px;}
+
+  /* Model */
+  .model-grid{margin-top:52px;display:grid;grid-template-columns:1fr 1fr;gap:56px;}
+  @media (max-width:760px){.model-grid{grid-template-columns:1fr;}}
+  .model-col h3{font-family:var(--font-display);font-weight:500;font-size:1.3rem;margin-bottom:18px;}
+  .model-list{list-style:none;margin:0;padding:0;}
+  .model-list li{position:relative;padding:12px 0 12px 22px;border-top:1px solid var(--line);font-size:.98rem;color:color-mix(in srgb, var(--fg) 82%, transparent);}
+  .model-list li:last-child{border-bottom:1px solid var(--line);}
+  .model-list li::before{content:"";position:absolute;left:0;top:22px;width:7px;height:7px;border-radius:50%;background:var(--sage);}
+  .model-col.rev .model-list li::before{background:var(--clay);}
+
+  /* Channels strip */
+  .channels{background:var(--bg-soft);}
+  .channel-row{margin-top:44px;display:flex;flex-wrap:wrap;gap:14px;}
+  .chip{border:1px solid var(--line);padding:10px 18px;border-radius:100px;font-size:.92rem;background:var(--card-bg);}
+
+  /* Team */
+  .team-grid{
+    margin-top:52px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:40px 32px;
+  }
+  @media (max-width:760px){.team-grid{grid-template-columns:1fr;gap:36px;}}
+  .team-member{display:flex;flex-direction:column;gap:16px;}
+  .team-member img{
+    width:88px;height:88px;border-radius:50%;
+    object-fit:cover;display:block;
+    border:2px solid var(--line);
+  }
+  .team-member h3{font-size:1.15rem;font-weight:500;}
+  .team-role{
+    font-size:.88rem;font-weight:600;
+    color:var(--ocean);margin-top:4px;
+  }
+  .team-member p{
+    margin-top:8px;
+    color:color-mix(in srgb, var(--fg) 72%, transparent);
+    font-size:.95rem;max-width:32ch;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]) .team-role{color:#7FCFC5;}
+  }
+  :root[data-theme="dark"] .team-role{color:#7FCFC5;}
+
+  /* CTA / contact */
+  .contact{text-align:left;}
+  .contact-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:end;}
+  @media (max-width:820px){.contact-grid{grid-template-columns:1fr;}}
+  .contact h2{max-width:14ch;}
+  .contact-actions{display:flex;flex-direction:column;gap:14px;align-items:flex-start;}
+  .contact-note{font-size:.9rem;color:color-mix(in srgb, var(--fg) 60%, transparent);max-width:40ch;}
+
+  footer{padding:38px 0;}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;font-size:.88rem;color:color-mix(in srgb, var(--fg) 55%, transparent);}
+  .footer-row a{text-decoration:none;}
+
+  /* mobile nav drawer */
+  .mobile-menu{
+    display:none;position:fixed;inset:0;z-index:50;background:var(--bg);
+    padding:24px 28px;flex-direction:column;gap:26px;
+  }
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{font-family:var(--font-display);font-size:1.6rem;text-decoration:none;color:var(--fg);}
+  .mobile-top{display:flex;justify-content:space-between;align-items:center;}
+  .mobile-close{background:none;border:none;color:var(--fg);cursor:pointer;}
+  .mobile-close svg{width:26px;height:26px;}
+
+  ::selection{background:var(--solar);color:var(--ink);}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="brand" href="#top">
+      <svg class="mark" viewBox="0 0 26 26" fill="none">
+        <circle cx="13" cy="13" r="12" stroke="var(--ocean)" stroke-width="1.6"/>
+        <path d="M13 6.5C10 9 8.5 11 8.5 13.8C8.5 16.7 10.5 19 13 19C15.5 19 17.5 16.7 17.5 13.8C17.5 11 16 9 13 6.5Z" fill="var(--ocean)"/>
+      </svg>
+      Green Impact
+    </a>
+    <ul class="navlinks">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#solution">Solution</a></li>
+      <li><a href="#why">Why us</a></li>
+      <li><a href="#who">Who we serve</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#model">Business model</a></li>
+    </ul>
+    <a class="navcta" href="#contact">Get in touch</a>
+    <button class="navtoggle" id="navToggle" aria-label="Open menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-top">
+    <span class="brand">Green Impact</span>
+    <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <a href="#problem">Problem</a>
+  <a href="#solution">Solution</a>
+  <a href="#why">Why us</a>
+  <a href="#who">Who we serve</a>
+  <a href="#team">Team</a>
+  <a href="#model">Business model</a>
+  <a href="#contact">Get in touch</a>
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="kicker">Off-grid desalination and cold storage</span>
+        <h1>One panel of sunlight. Clean water and food that lasts.</h1>
+        <p class="lede">Green Impact is a dual-function solar system that desalinates water and refrigerates food, built for remote and underserved communities the grid (and most existing solutions) never reach.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-solid" href="#contact">Partner with us</a>
+          <a class="btn btn-outline" href="#solution">See how it works</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 420 360" fill="none">
+          <circle cx="330" cy="70" r="34" fill="var(--solar)"/>
+          <g stroke="var(--solar)" stroke-width="4" stroke-linecap="round">
+            <path d="M330 18v-14"/><path d="M330 136v14"/>
+            <path d="M378 70h14"/><path d="M268 70h14"/>
+            <path d="M364 36l10-10"/><path d="M296 104l-10 10"/>
+            <path d="M364 104l10 10"/><path d="M296 36l-10-10"/>
+          </g>
+          <g transform="translate(50,120)">
+            <rect x="0" y="0" width="150" height="90" rx="4" fill="var(--card-bg)" stroke="var(--ocean)" stroke-width="2"/>
+            <line x1="0" y1="30" x2="150" y2="30" stroke="var(--ocean)" stroke-width="1.4" opacity="0.5"/>
+            <line x1="0" y1="60" x2="150" y2="60" stroke="var(--ocean)" stroke-width="1.4" opacity="0.5"/>
+            <line x1="37.5" y1="0" x2="37.5" y2="90" stroke="var(--ocean)" stroke-width="1.4" opacity="0.5"/>
+            <line x1="75" y1="0" x2="75" y2="90" stroke="var(--ocean)" stroke-width="1.4" opacity="0.5"/>
+            <line x1="112.5" y1="0" x2="112.5" y2="90" stroke="var(--ocean)" stroke-width="1.4" opacity="0.5"/>
+          </g>
+          <path d="M200 165 C 260 165, 240 230, 310 230" stroke="var(--sage)" stroke-width="2.5" fill="none" stroke-dasharray="1 7" stroke-linecap="round"/>
+          <path d="M120 210 C 120 260, 190 250, 190 300" stroke="var(--sage)" stroke-width="2.5" fill="none" stroke-dasharray="1 7" stroke-linecap="round"/>
+
+          <g transform="translate(280,235)">
+            <path d="M30 0 C 45 20 55 34 55 48 C55 66 42 78 30 78 C18 78 5 66 5 48 C5 34 15 20 30 0Z" fill="var(--ocean)"/>
+            <path d="M30 22 C 22 34 18 42 18 50" stroke="var(--paper)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.6"/>
+          </g>
+
+          <g transform="translate(150,270)">
+            <rect x="0" y="0" width="80" height="68" rx="6" fill="var(--card-bg)" stroke="var(--clay)" stroke-width="2"/>
+            <rect x="0" y="0" width="80" height="22" rx="6" fill="var(--clay)" opacity="0.15"/>
+            <line x1="10" y1="34" x2="70" y2="34" stroke="var(--clay)" stroke-width="1.4"/>
+            <line x1="10" y1="50" x2="70" y2="50" stroke="var(--clay)" stroke-width="1.4"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section class="problem" id="problem">
+    <div class="wrap">
+      <div class="problem-head">
+        <h2>Two crises, one root cause.</h2>
+        <p class="lede" style="margin-top:16px;">Remote and underserved communities are asked to solve water and food security separately, with fixes that assume a grid connection they don't have.</p>
+      </div>
+      <div class="problem-list">
+        <div class="problem-item">
+          <span class="problem-num">01</span>
+          <h3>Water scarcity, unevenly felt</h3>
+          <p>Reliable access to clean water remains out of reach across many remote and underserved regions, forcing households to rely on distant or unsafe sources.</p>
+        </div>
+        <div class="problem-item">
+          <span class="problem-num">02</span>
+          <h3>Food spoils before it's eaten</h3>
+          <p>Without refrigeration, harvested and stored food breaks down quickly, turning scarcity into waste, and waste into lost income.</p>
+        </div>
+        <div class="problem-item">
+          <span class="problem-num">03</span>
+          <h3>Built on fuel that runs out</h3>
+          <p>Diesel generators and grid extensions are expensive, unreliable, and dependent on supply chains that rarely favor remote areas.</p>
+        </div>
+        <div class="problem-item">
+          <span class="problem-num">04</span>
+          <h3>Existing fixes solve one thing</h3>
+          <p>Bottled water delivery, standalone coolers, and rainwater systems each address a single symptom. None combine water and food security in one affordable system.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section id="solution">
+    <div class="wrap">
+      <div class="solution-top">
+        <div class="solution-copy">
+          <h2>A dual-function system, one power source.</h2>
+          <p class="lede">Green Impact pairs solar-powered desalination with refrigeration in a single, integrated unit, designed to be installed, run, and maintained by the communities it serves.</p>
+          <div class="steps">
+            <div class="step">
+              <div class="step-glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
+              <div>
+                <h3>Solar captures the energy</h3>
+                <p>Photovoltaic panels built for off-grid, remote installation power the entire system: no fuel, no grid connection required.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M12 2C9 6 6 9 6 13a6 6 0 0012 0c0-4-3-7-6-11z"/></svg></div>
+              <div>
+                <h3>One input, two outputs</h3>
+                <p>The same solar power runs an MVC (mechanical vapor compression) desalination unit and a refrigeration unit side by side.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-glyph"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 20l4-4M4 20v-4h4"/><path d="M20 4l-4 4M20 4v4h-4"/><circle cx="12" cy="12" r="3"/></svg></div>
+              <div>
+                <h3>Delivered with training</h3>
+                <p>Local teams are trained to install, operate, and maintain their own system, built for long-term independence, not dependency.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="diagram-frame">
+          <svg viewBox="0 0 320 380" fill="none">
+            <text x="160" y="26" text-anchor="middle" font-family="Public Sans" font-size="12" fill="var(--fg)" opacity="0.55">Sun</text>
+            <circle cx="160" cy="55" r="22" fill="var(--solar)"/>
+            <line x1="160" y1="80" x2="160" y2="120" stroke="var(--fg)" stroke-opacity="0.3" stroke-width="1.6" stroke-dasharray="2 6"/>
+            <rect x="90" y="120" width="140" height="46" rx="6" fill="var(--card-bg)" stroke="var(--ocean)" stroke-width="1.8"/>
+            <text x="160" y="148" text-anchor="middle" font-family="Public Sans" font-size="12.5" font-weight="600" fill="var(--ocean)">Solar power unit</text>
+
+            <line x1="120" y1="166" x2="70" y2="220" stroke="var(--fg)" stroke-opacity="0.3" stroke-width="1.6" stroke-dasharray="2 6"/>
+            <line x1="200" y1="166" x2="250" y2="220" stroke="var(--fg)" stroke-opacity="0.3" stroke-width="1.6" stroke-dasharray="2 6"/>
+
+            <rect x="10" y="220" width="120" height="70" rx="6" fill="var(--card-bg)" stroke="var(--ocean)" stroke-width="1.8"/>
+            <text x="70" y="248" text-anchor="middle" font-family="Public Sans" font-size="11.5" font-weight="600" fill="var(--fg)">MVC</text>
+            <text x="70" y="264" text-anchor="middle" font-family="Public Sans" font-size="11.5" font-weight="600" fill="var(--fg)">desalination</text>
+
+            <rect x="190" y="220" width="120" height="70" rx="6" fill="var(--card-bg)" stroke="var(--clay)" stroke-width="1.8"/>
+            <text x="250" y="248" text-anchor="middle" font-family="Public Sans" font-size="11.5" font-weight="600" fill="var(--fg)">Refrigeration</text>
+            <text x="250" y="264" text-anchor="middle" font-family="Public Sans" font-size="11.5" font-weight="600" fill="var(--fg)">unit</text>
+
+            <line x1="70" y1="290" x2="70" y2="320" stroke="var(--fg)" stroke-opacity="0.3" stroke-width="1.6" stroke-dasharray="2 6"/>
+            <line x1="250" y1="290" x2="250" y2="320" stroke="var(--fg)" stroke-opacity="0.3" stroke-width="1.6" stroke-dasharray="2 6"/>
+
+            <text x="70" y="345" text-anchor="middle" font-family="Public Sans" font-size="12" fill="var(--ocean)" font-weight="600">Clean water</text>
+            <text x="250" y="345" text-anchor="middle" font-family="Public Sans" font-size="12" fill="var(--clay)" font-weight="600">Preserved food</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="why" id="why">
+    <div class="wrap">
+      <h2>What makes it defensible.</h2>
+      <p class="lede" style="margin-top:16px;">A unique combination of technology and relationships that's hard to copy quickly.</p>
+      <div class="why-grid">
+        <div class="why-cell">
+          <svg class="eyeglyph" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 21V9a2 2 0 012-2h3V5a2 2 0 012-2h2a2 2 0 012 2v2h3a2 2 0 012 2v12"/><path d="M9 21v-6h6v6"/></svg>
+          <h3>Patented dual-function tech</h3>
+          <p>MVC desalination and solar refrigeration engineered into one system, not bolted together. That pairing is the core of our unique value proposition.</p>
+        </div>
+        <div class="why-cell">
+          <svg class="eyeglyph" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M17 21v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          <h3>Partnerships from day one</h3>
+          <p>Built alongside NGOs, government agencies, and local communities, not sold to them after the fact.</p>
+        </div>
+        <div class="why-cell" style="border-right:none;">
+          <svg class="eyeglyph" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          <h3>Proven in the field</h3>
+          <p>Pilot projects have already run in real conditions, with positive feedback from the communities using them.</p>
+        </div>
+        <div class="why-cell" style="border-right:none;">
+          <svg class="eyeglyph" viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg>
+          <h3>Designed for the last mile</h3>
+          <p>Local training and support are part of the product, not an afterthought, so systems keep running long after installation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE SERVE -->
+  <section id="who">
+    <div class="wrap">
+      <h2>Who it's built for.</h2>
+      <p class="lede" style="margin-top:16px;">Green Impact is designed around the people living the problem, and the organizations working to solve it with them.</p>
+      <div class="who-grid">
+        <div class="who-col">
+          <h3>Customer segments</h3>
+          <ul class="who-list">
+            <li><b>Rural and underserved communities</b><span>The direct beneficiaries of clean water and reliable food storage.</span></li>
+            <li><b>NGOs and government agencies</b><span>Focused on water and food security programs in the regions we serve.</span></li>
+            <li><b>Environmental and sustainability organizations</b><span>Looking for renewable, off-grid infrastructure to fund and deploy.</span></li>
+          </ul>
+        </div>
+        <div class="who-col">
+          <h3>Early adopters</h3>
+          <ul class="who-list">
+            <li><b>Rural community leaders</b></li>
+            <li><b>Local NGOs and nonprofits</b></li>
+            <li><b>Government agencies</b></li>
+            <li><b>Health and hygiene organizations</b></li>
+            <li><b>Environmental advocacy groups</b></li>
+            <li><b>Agricultural cooperatives</b></li>
+            <li><b>International aid organizations</b></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT / METRICS -->
+  <section class="impact">
+    <div class="wrap">
+      <h2>How we measure it.</h2>
+      <p class="lede" style="margin-top:16px;">Success isn't systems shipped. It's water produced, food preserved, and illness prevented.</p>
+      <div class="metric-grid">
+        <div class="metric"><h3>Deployed</h3><p>Number of systems installed and operating in the field.</p></div>
+        <div class="metric"><h3>Produced</h3><p>Volume of clean water generated and food preserved per system.</p></div>
+        <div class="metric"><h3>Prevented</h3><p>Reduction in waterborne disease and food spoilage in served communities.</p></div>
+        <div class="metric"><h3>Trusted</h3><p>Customer satisfaction and feedback from the communities we work with.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESS MODEL -->
+  <section id="model">
+    <div class="wrap">
+      <h2>How it's funded and how it runs.</h2>
+      <div class="model-grid">
+        <div class="model-col cost">
+          <h3>Cost structure</h3>
+          <ul class="model-list">
+            <li>Research and development</li>
+            <li>Manufacturing and production</li>
+            <li>Training and ongoing support</li>
+            <li>Marketing and distribution</li>
+          </ul>
+        </div>
+        <div class="model-col rev">
+          <h3>Revenue streams</h3>
+          <ul class="model-list">
+            <li>Sales of Green Impact systems</li>
+            <li>Maintenance and support contracts</li>
+            <li>Grants and funding from NGOs and government agencies</li>
+            <li>Potential technology licensing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHANNELS -->
+  <section class="channels">
+    <div class="wrap">
+      <h2>How we reach the field.</h2>
+      <p class="lede" style="margin-top:16px;">A go-to-market built on relationships, not just marketing spend.</p>
+      <div class="channel-row">
+        <span class="chip">Direct sales to NGOs &amp; government agencies</span>
+        <span class="chip">Local cooperative &amp; community partnerships</span>
+        <span class="chip">Online presence &amp; social media</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <div class="wrap">
+      <h2>The people behind it.</h2>
+      <p class="lede" style="margin-top:16px;">A small team spanning engineering, field partnerships, and operations.</p>
+      <div class="team-grid">
+        <article class="team-member">
+          <img src="https://i.pravatar.cc/176?img=32" width="88" height="88" alt="Portrait of Amira Benali" loading="lazy">
+          <div>
+            <h3>Amira Benali</h3>
+            <p class="team-role">Founder &amp; CEO</p>
+            <p>Leads product strategy and partner relationships across NGO and government programs.</p>
+          </div>
+        </article>
+        <article class="team-member">
+          <img src="https://i.pravatar.cc/176?img=12" width="88" height="88" alt="Portrait of James Okonkwo" loading="lazy">
+          <div>
+            <h3>James Okonkwo</h3>
+            <p class="team-role">Head of Engineering</p>
+            <p>Owns the dual-function MVC and refrigeration stack, from field pilots to production.</p>
+          </div>
+        </article>
+        <article class="team-member">
+          <img src="https://i.pravatar.cc/176?img=47" width="88" height="88" alt="Portrait of Sofia Reyes" loading="lazy">
+          <div>
+            <h3>Sofia Reyes</h3>
+            <p class="team-role">Partnerships Lead</p>
+            <p>Builds the local training networks that keep systems running after installation day.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <h2>Let's bring clean water and food security further.</h2>
+        <p class="lede" style="margin-top:16px;">Whether you're an investor, an NGO, or a government partner, we'd like to hear from you.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn btn-solid" href="mailto:hello@greenimpact.example">Email hello@greenimpact.example</a>
+        <p class="contact-note">Replace this with your real contact address before sharing the site.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© 2026 Green Impact. Off-grid desalination and cold storage.</span>
+    <a href="#top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const mobileClose = document.getElementById('mobileClose');
+  navToggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.remove('open')));
+</script>
+
+</body>
+</html>
